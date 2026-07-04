@@ -145,7 +145,7 @@ class ConversationTest extends TestCase
 
     public function test_it_can_remove_a_single_participant_from_conversation()
     {
-        $clientModel  = factory(Client::class)->create();
+        $clientModel  = Client::factory()->create();
         $conversation = Chat::createConversation([$this->alpha, $this->bravo, $clientModel]);
         $conversation = Chat::conversation($conversation)->removeParticipants($this->alpha);
 
@@ -416,7 +416,7 @@ class ConversationTest extends TestCase
     public function test_it_returns_custom_participant_details_when_method_is_overridden()
     {
         // Client model has a custom getParticipantDetails method
-        $client = factory(Client::class)->create(['name' => 'Test Client']);
+        $client = Client::factory()->create(['name' => 'Test Client']);
 
         $details = $client->getParticipantDetails();
 

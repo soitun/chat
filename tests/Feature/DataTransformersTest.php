@@ -3,6 +3,7 @@
 namespace Musonza\Chat\Tests\Feature;
 
 use Musonza\Chat\Models\Conversation;
+use Musonza\Chat\Tests\Helpers\Models\Conversation as TestConversation;
 use Musonza\Chat\Tests\Helpers\Transformers\TestConversationTransformer;
 use Musonza\Chat\Tests\TestCase;
 
@@ -17,7 +18,7 @@ class DataTransformersTest extends TestCase
 
     public function test_conversation_without_transformer()
     {
-        $conversation               = factory(Conversation::class)->create();
+        $conversation               = TestConversation::factory()->create();
         $responseWithoutTransformer = $this->getJson(route('conversations.show', $conversation->getKey()))
             ->assertStatus(200);
 
@@ -26,7 +27,7 @@ class DataTransformersTest extends TestCase
 
     public function test_conversation_with_transformer()
     {
-        $conversation = factory(Conversation::class)->create();
+        $conversation = TestConversation::factory()->create();
         $this->app['config']->set('musonza_chat.transformers.conversation', TestConversationTransformer::class);
 
         $responseWithTransformer = $this->getJson(route('conversations.show', $conversation->getKey()))

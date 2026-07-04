@@ -31,9 +31,9 @@ class MessageTest extends TestCase
     public function test_it_can_send_a_message_between_models()
     {
         /** @var Client $clientModel */
-        $clientModel = factory(Client::class)->create();
-        $userModel   = factory(User::class)->create();
-        $botModel    = factory(Bot::class)->create();
+        $clientModel = Client::factory()->create();
+        $userModel   = User::factory()->create();
+        $botModel    = Bot::factory()->create();
 
         $conversation = Chat::createConversation([$clientModel, $userModel, $botModel]);
 
@@ -133,8 +133,8 @@ class MessageTest extends TestCase
 
     public function test_it_can_tell_message_sender()
     {
-        $bot    = factory(Bot::class)->create();
-        $client = factory(Client::class)->create();
+        $bot    = Bot::factory()->create();
+        $client = Client::factory()->create();
 
         $conversation = Chat::createConversation([$this->alpha, $client, $bot]);
         Chat::message('Hello')->from($this->alpha)->to($conversation)->send();
@@ -240,8 +240,8 @@ class MessageTest extends TestCase
             'name', 'bot_id',
         ]);
 
-        $bot    = factory(Bot::class)->create();
-        $client = factory(Client::class)->create();
+        $bot    = Bot::factory()->create();
+        $client = Client::factory()->create();
 
         $conversation = Chat::createConversation([$client, $bot]);
         Chat::message('Hello')->from($bot)->to($conversation)->send();

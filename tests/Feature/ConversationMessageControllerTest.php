@@ -3,9 +3,9 @@
 namespace Musonza\Chat\Tests\Feature;
 
 use Chat;
-use Musonza\Chat\Models\Conversation;
 use Musonza\Chat\Models\Message;
 use Musonza\Chat\Tests\Helpers\Models\Client;
+use Musonza\Chat\Tests\Helpers\Models\Conversation;
 use Musonza\Chat\Tests\Helpers\Models\User;
 use Musonza\Chat\Tests\TestCase;
 
@@ -20,9 +20,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_store()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
 
@@ -45,9 +45,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_index()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
         Chat::message('hello')->from($userModel)->to($conversation)->send();
@@ -85,9 +85,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_clear_conversation()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         $parameters = [
             $conversation->getKey(),
@@ -106,9 +106,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_destroy()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
         Chat::message('hello')->from($userModel)->to($conversation)->send();
@@ -130,9 +130,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_index_with_cursor()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
         Chat::message('message 1')->from($userModel)->to($conversation)->send();
@@ -169,9 +169,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_index_with_cursor_pagination_navigation()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
 
@@ -224,9 +224,9 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_index_with_cursor_descending_order()
     {
-        $conversation = factory(Conversation::class)->create();
-        $userModel    = factory(User::class)->create();
-        $clientModel  = factory(Client::class)->create();
+        $conversation = Conversation::factory()->create();
+        $userModel    = User::factory()->create();
+        $clientModel  = Client::factory()->create();
 
         Chat::conversation($conversation)->addParticipants([$userModel, $clientModel]);
         Chat::message('message 1')->from($userModel)->to($conversation)->send();
@@ -252,7 +252,7 @@ class ConversationMessageControllerTest extends TestCase
 
     public function test_index_with_cursor_requires_participant()
     {
-        $conversation = factory(Conversation::class)->create();
+        $conversation = Conversation::factory()->create();
 
         $parameters = [
             $conversation->getKey(),
